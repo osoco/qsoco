@@ -1,6 +1,6 @@
 # ODocker
 
-**TODO: Add description**
+Use Docker from Elixir. Just started...
 
 ## Installation
 
@@ -14,6 +14,8 @@ def deps do
   ]
 end
 ```
+
+Some interesanting links developing...
 
 https://github.com/devinus/poison
 https://hexdocs.pm/httpoison/HTTPoison.html

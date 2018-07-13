@@ -1,4 +1,3 @@
 # Qsoco
 
-**TODO: Add description**
-
+Elixir formation project in [Osoco](https://osoco.es/)
