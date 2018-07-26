@@ -2,6 +2,8 @@ defmodule ODockerTest do
   use ExUnit.Case
   doctest ODocker
 
+  @alpine "alpine:3.7"
+
   # HTTPoison.get! "http+unix://%2Fvar%2Frun%2Fdocker.sock/containers/json"
 
   test "get api version" do
@@ -26,16 +28,30 @@ defmodule ODockerTest do
 
   test "delete images" do
     result = ODocker.delete_images(fn image -> image["RepoTags"] != nil && Enum.any?(image["RepoTags"], fn tags -> String.starts_with?(tags, "ubuntu") end) end)
-    assert result == "patata"
+    assert result == []
   end
 
-  #test "pull a container" do
-  #  result = ODocker.pull_image("ubuntu")
-  #  assert result == "patata"    
-  #end
+  test "pull an image" do
+    result = ODocker.pull_image(@alpine)
+    assert elem(result, 0) == :ok
+    assert elem(result, 1) == @alpine
+  end
 
-  #test "create container" do
-  #  result = ODocker.create_container("ubuntu")
-  #  assert result == "patata"
-  #end
+  test "create container" do
+    {:ok, result} = ODocker.create_container(@alpine)
+    assert result["Id"]
+    assert !result["Warnings"]
+  end
+
+  test "remove not existing container" do
+    {result, error} = ODocker.remove_container(id)
+    assert result == :error_handler
+    assert error == "patata"
+  end
+
+  test "remove a container" do
+    {:ok, %{"Id" => id}} = ODocker.create_container(@alpine)
+    {result, _any} = ODocker.remove_container(id)
+    assert result == :ok
+  end
 end
