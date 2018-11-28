@@ -11,8 +11,14 @@ defmodule ODocker.MixProject do
       lockfile: "../../mix.lock",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      # language: :erlang,
+      escript: escript()
     ]
+  end
+
+  defp escript do
+    [main_module: ODocker.CLI]
   end
 
   # Run "mix help compile.app" to learn about applications.
