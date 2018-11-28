@@ -13,7 +13,7 @@ fi
 # Local variables
 odocker_bin="${ODOCKER_DIR}/bin"
 odocker_bin_destination="${odocker_bin}/odocker.sh"
-odocker_bin_source="https://osoco.github.io/qsoco/odocker.js"
+odocker_bin_source="https://osoco.github.io/qsoco/odocker_sh.html"
 odocker_bash_profile="${HOME}/.bash_profile"
 odocker_profile="${HOME}/.profile"
 odocker_bashrc="${HOME}/.bashrc"
