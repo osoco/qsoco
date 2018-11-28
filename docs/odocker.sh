@@ -7,7 +7,7 @@ if ! command -v docker > /dev/null; then
   exit 1
 fi
 
-ODOCKERS_UP=$(docker container ls -q -f "name=$CONTAINER_NAME" | wc -l | tr -d ' ');
+ODOCKERS_UP=$(docker container ls -a -q -f "name=$CONTAINER_NAME" | wc -l | tr -d ' ');
 
 if [ "$ODOCKERS_UP" != "1" ] ; then
   echo "Starting odocker..."
@@ -20,4 +20,3 @@ fi
 #echo "go! ${1} ${2} ${3} ${4}"
 
 docker exec odocker ./odocker $1 $2 $3 $4 $5
-

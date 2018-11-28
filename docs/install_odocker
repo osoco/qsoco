@@ -50,8 +50,6 @@ echo '                                   Attempting odocker installation...'
 echo ''
 
 # Sanity checks
-
-echo "Looking for curl..."
 if [ -z $(which curl) ]; then
 	echo "Not found."
 	echo ""
@@ -69,6 +67,7 @@ mkdir -p "$odocker_bin"
 
 echo "Download odocker bash..."
 curl --location --progress-bar "${odocker_bin_source}" > "$odocker_bin_destination"
+chmod +x "$odocker_bin_destination"
 
 if [[ $darwin == true ]]; then
   if [[ -z $(grep 'odocker.sh' "$odocker_bash_profile") ]]; then
@@ -93,8 +92,8 @@ if [[ -z $(grep 'odocker.sh' "$odocker_zshrc") ]]; then
     echo "Updated existing ${odocker_zshrc}"
 fi
 
-echo -e "\n\nAll done, odocker version ${ODOCKER_VERSION} installed!\n"
-echo "Get info with:"
+echo -e "\nAll done, odocker version ${ODOCKER_VERSION} installed!\n"
+echo "To get your odocker alias ready run: ´source ~/.bashrc´ or ´source ~/.zshrc´. Then run:"
 echo ""
 echo "    odocker help"
 echo ""
