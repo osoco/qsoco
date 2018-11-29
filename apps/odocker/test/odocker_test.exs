@@ -12,7 +12,6 @@ defmodule ODockerTest do
   end
 
   test "get api version" do
-
     assert ODocker.api_version() > "1.37"
   end
 

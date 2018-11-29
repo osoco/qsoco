@@ -3,7 +3,6 @@
 #Install: beta
 
 # Global variables
-ODOCKER_VERSION="0.1"
 ODOCKER_PLATFORM=$(uname)
 ODOCKER_CONTAINER_NAME="odocker"
 IMAGE_NAME="nexus.osoco.es/osoco/odocker"
@@ -108,8 +107,11 @@ if [[ ! -z $odocker_image ]]; then
     docker rmi -f $odocker_image
 fi
 
-echo -e "\nAll done, odocker version ${ODOCKER_VERSION} installed!\n"
-echo "To get your odocker alias ready run: ´source ~/.bashrc´ or ´source ~/.zshrc´. Then run:"
+echo ""
+echo "odocker installed!"
+echo ""
+echo "To get your odocker alias ready, please run: ´source ~/.bashrc´ or ´source ~/.zshrc´."
+echo "Then you can play with odocker:"
 echo ""
 echo "    odocker help"
 echo ""

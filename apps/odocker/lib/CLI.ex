@@ -5,7 +5,16 @@ defmodule ODocker.CLI do
     process_arguments(args)
   end
 
+  def version do
+    {result, text} = File.read("version")
+    case result do
+      :ok -> text
+      :error -> "(no version)"
+    end
+  end
+
   defp process_arguments(["help" | _rest]) do
+    IO.puts "ODocker version: " <> ODocker.CLI.version
     IO.puts "Docker api running in your system: " <> ODocker.api_version()
     IO.puts ""
     IO.puts "Available commands:"
