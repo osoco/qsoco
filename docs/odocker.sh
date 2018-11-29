@@ -26,4 +26,10 @@ if [ "$ODOCKERS_UP" != "1" ] ; then
 fi 
 #echo "go! ${1} ${2} ${3} ${4}"
 
-docker exec odocker ./odocker $1 $2 $3 $4 $5
+if [ "$1" == "autoClean" ] ; then
+  echo "Removing odocker container and image..."
+  docker rm -f $CONTAINER_NAME
+  docker rmi $IMAGE_NAME
+else
+  docker exec odocker ./odocker $1 $2 $3 $4 $5
+fi

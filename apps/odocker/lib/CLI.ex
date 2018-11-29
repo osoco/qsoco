@@ -10,6 +10,7 @@ defmodule ODocker.CLI do
     IO.puts ""
     IO.puts "Available commands:"
     IO.puts "    help                this command"
+    IO.puts "    autoClean           remove odocker container and image"
     IO.puts "    cleanContainers     remove all containers"
     IO.puts "    cleanImages         remove all images"
     IO.puts "    cleanAll            remove all containers and images"
