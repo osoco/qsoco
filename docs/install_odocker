@@ -5,6 +5,8 @@
 # Global variables
 ODOCKER_VERSION="0.1"
 ODOCKER_PLATFORM=$(uname)
+ODOCKER_CONTAINER_NAME="odocker"
+IMAGE_NAME="nexus.osoco.es/osoco/odocker"
 
 if [ -z "$ODOCKER_DIR" ]; then
     ODOCKER_DIR="$HOME/.odocker"
@@ -90,6 +92,20 @@ if [[ -z $(grep 'odocker.sh' "$odocker_zshrc") ]]; then
     touch "$odocker_zshrc"
     echo -e "\n$odocker_init_snippet" >> "$odocker_zshrc"
     echo "Updated existing ${odocker_zshrc}"
+fi
+
+# Remove any odocker container
+odocker_container=$(docker container ls -a -q -f "name=$ODOCKER_CONTAINER_NAME")
+if [[ ! -z $odocker_container ]]; then
+    echo "Removing any odocker container..."
+    docker rm -f $odocker_container >> /dev/null
+fi
+
+# Remove any odocker image installed
+odocker_image=$(docker images "$IMAGE_NAME" -q)
+if [[ ! -z $odocker_image ]]; then
+    echo "Removing actual odocker image..."
+    docker rmi -f $odocker_image
 fi
 
 echo -e "\nAll done, odocker version ${ODOCKER_VERSION} installed!\n"

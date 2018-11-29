@@ -6,14 +6,19 @@ defmodule ODockerTest do
 
   # HTTPoison.get! "http+unix://%2Fvar%2Frun%2Fdocker.sock/containers/json"
 
-  test "get api version" do
-    assert ODocker.api_version() == "1.37"
+  setup_all do
+    ODocker.delete_all_containers
+    {:ok, images: ODocker.images }
   end
 
-  test "get containers" do
+  test "get api version" do
+
+    assert ODocker.api_version() > "1.37"
+  end
+
+  test "get initial containers" do
     {:ok, containers} = ODocker.containers()
-    assert Enum.count(containers) == 2
-    assert Enum.map(containers, fn container -> container["State"] end) == ["running", "running"]
+    assert Enum.count(containers) == 0
   end
 
   test "get images" do
@@ -37,21 +42,18 @@ defmodule ODockerTest do
     assert elem(result, 1) == @alpine
   end
 
-  test "create container" do
+  test "create alpine container and then delete it" do
     {:ok, result} = ODocker.create_container(@alpine)
     assert result["Id"]
     assert !result["Warnings"]
-  end
-
-  test "remove not existing container" do
-    {result, error} = ODocker.remove_container(id)
-    assert result == :error_handler
-    assert error == "patata"
-  end
-
-  test "remove a container" do
-    {:ok, %{"Id" => id}} = ODocker.create_container(@alpine)
-    {result, _any} = ODocker.remove_container(id)
+    {:ok, containers} = ODocker.all_containers()
+    assert Enum.map(containers, fn container -> container["State"] end) == ["created"]
+    {result, _any} = ODocker.delete_container(result["Id"])
     assert result == :ok
+  end
+
+  test "delete not existing container" do
+    {result, _error} = ODocker.delete_container("patata")
+    assert result == :error
   end
 end
