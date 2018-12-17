@@ -67,7 +67,11 @@ fi
 mkdir -p "$odocker_bin"
 
 echo "Download odocker bash..."
-curl --location --progress-bar "${odocker_bin_source}" > "$odocker_bin_destination"
+if [ -z "$1" ]; then
+    curl --location --progress-bar "${odocker_bin_source}" > "$odocker_bin_destination"
+else
+    cp odocker.sh "$odocker_bin_destination"
+fi
 chmod +x "$odocker_bin_destination"
 
 if [[ $darwin == true ]]; then

@@ -14,14 +14,14 @@ if [ "$ODOCKERS_UP" != "1" ] ; then
   STOPPED_DOCKER=$(docker container ls -a -q -f "name=$CONTAINER_NAME")
 
   if [ -z $STOPPED_DOCKER ]; then
-      echo "Starting odocker..."
-      docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name $CONTAINER_NAME $IMAGE_NAME tail -f /dev/null >> /dev/null
+      echo "Starting odocker container..."
+      docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name $CONTAINER_NAME $IMAGE_NAME tail -f /dev/null 2> /dev/null
       RESULT=$?
       if [ $RESULT -ne 0 ] ; then
          echo "Error starting odocker: $RESULT"
       fi
   else
-      docker start $STOPPED_DOCKER >> /dev/null
+      docker start $STOPPED_DOCKER 2> /dev/null
   fi
 fi 
 #echo "go! ${1} ${2} ${3} ${4}"
@@ -29,7 +29,7 @@ fi
 if [ "$1" == "autoClean" ] ; then
   echo "Removing odocker container and image..."
   docker rm -f $CONTAINER_NAME
-  docker rmi $IMAGE_NAME
+  docker rmi -f $IMAGE_NAME
 else
   docker exec odocker ./odocker $1 $2 $3 $4 $5
 fi
