@@ -13,6 +13,7 @@ jobs:  # basic units of work in a run
       - run: mix local.hex --force  # install Hex locally (without prompt)
       - run: mix local.rebar --force  # fetch a copy of rebar (without prompt)
       - run: mix do deps.get
+      - run: curl --unix-socket /var/run/docker.sock http:/v1.24/containers/json
 
       #- run: mix test  # run all tests in project
       - run: elixir test/odocker.exs
