@@ -1,6 +1,10 @@
-# ODocker
+# odocker
 
 Use Docker from Elixir. Just started...
+
+https://osoco.github.io/qsoco/odocker.html
+
+Available at dockerhub (jorgeosoco/odocker)
 
 ## Installation
 
@@ -24,6 +28,12 @@ Generate image with erlang and odocker executable (using Dockerfile): > docker b
 Start container as daemon: > docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name odocker osoco/odocker tail -f /dev/null
 
 Execute odocker in the container: > docker exec odocker ./odocker [params]
+
+## Release
+
+Generate a release and publish in docker hub (jorgeosoco/odocker):
+
+./release.sh <version>
 
 ## Info
 

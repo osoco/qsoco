@@ -50,7 +50,9 @@ defmodule ODocker do
   end
 
   def pull_image(image) do
-    HTTPoison.post!(@url <> "/images/create?fromImage=" <> image, "") |> result_by_status_code(image)
+    HTTPoison.post!(@url <> "/images/create?fromImage=" <> image, 
+      [], [timeout: 50_000, recv_timeout: 50_000]) 
+    |> result_by_status_code(image)
   end
 
   def delete_image(id) do
@@ -70,10 +72,14 @@ defmodule ODocker do
     list_images |> Enum.filter(function) |> Enum.map(fn image -> delete_image(image["Id"]) end)
   end
 
-  def create_container(image) do
+  def create_container(image, command \\ []) do
+    params = case command do
+      [] -> %{"Image" => image}
+      _ -> %{"Image" => image, "Cmd" => command}
+    end
     HTTPoison.post!(
       @url <> "/containers/create", 
-      Poison.encode!(%{"Image" => image}),
+      Poison.encode!(params),
       [{"Content-Type", "application/json"}]
     ) |> result_and_body
   end

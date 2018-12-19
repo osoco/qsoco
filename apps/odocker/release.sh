@@ -1,7 +1,7 @@
 #!/bin/sh
 
-REPOSITORY="nexus.osoco.es"
-IMAGE_NAME="${REPOSITORY}/osoco/odocker"
+REPOSITORY="https://index.docker.io/v1/"
+IMAGE_NAME="jorgeosoco/odocker"
 
 die() {
     echo >&2 "$@"
@@ -13,6 +13,7 @@ die() {
 mix test
 mix escript.build
 
+rm version
 echo $1 >> version
 
 docker login "$REPOSITORY"

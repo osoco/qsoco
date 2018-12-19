@@ -5,7 +5,7 @@
 # Global variables
 ODOCKER_PLATFORM=$(uname)
 ODOCKER_CONTAINER_NAME="odocker"
-IMAGE_NAME="nexus.osoco.es/osoco/odocker"
+IMAGE_NAME="jorgeosoco/odocker"
 
 if [ -z "$ODOCKER_DIR" ]; then
     ODOCKER_DIR="$HOME/.odocker"

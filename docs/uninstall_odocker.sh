@@ -3,7 +3,7 @@
 #Uninstall: beta
 
 ODOCKER_CONTAINER_NAME="odocker"
-IMAGE_NAME="nexus.osoco.es/osoco/odocker"
+IMAGE_NAME="jorgeosoco/odocker"
 ODOCKER_DIR="$HOME/.odocker"
 
 odocker_bash_profile="${HOME}/.bash_profile"

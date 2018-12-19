@@ -1,6 +1,6 @@
 #!/bin/sh
 
-IMAGE_NAME="nexus.osoco.es/osoco/odocker"
+IMAGE_NAME="jorgeosoco/odocker"
 CONTAINER_NAME="odocker"
 if ! command -v docker > /dev/null; then
   echo "Docker not installed, please install it to use odocker."

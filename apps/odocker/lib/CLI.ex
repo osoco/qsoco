@@ -14,7 +14,7 @@ defmodule ODocker.CLI do
   end
 
   defp process_arguments(["help" | _rest]) do
-    IO.puts "ODocker version: " <> ODocker.CLI.version
+    IO.puts "odocker version: " <> ODocker.CLI.version
     IO.puts "Docker api running in your system: " <> ODocker.api_version()
     IO.puts ""
     IO.puts "Available commands:"
